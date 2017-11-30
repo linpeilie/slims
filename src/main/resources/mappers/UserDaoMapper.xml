@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.slims.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="state" property="state"/>
+    </resultMap>
+
+    <!--添加一个新的用户-->
+    <insert id="insert" parameterType="User">
+        insert
+          into t_user_tem
+        (<include refid="userProperties"/> )
+          values(#{userId},#{userName},#{tel},#{email},#{password},#{state})
+    </insert>
+
+    <!--删除一个用户-->
+    <delete id="delete" parameterType="User">
+        DELETE
+          FROM t_user_tem
+         WHERE user_id = #{userId}
+    </delete>
+
+    <!--验证用户-->
+    <select id="selectOne" parameterType="User" resultMap="BaseResultMap">
+        select <include refid="userProperties"/>
+          from t_user_tem
+         where user_name = #{userName}
+    </select>
+
+    <!--查询所有用户-->
+    <select id="showAll" resultMap="BaseResultMap">
+        select <include refid="userProperties"/>
+          from t_user_tem
+    </select>
+
+
+    <!--User表属性-->
+    <sql id="userProperties">
+        user_id,user_name,tel,email,password,state
+    </sql>
+
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="slims:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="slims.war">
+      <element id="artifact" artifact-name="slims:war exploded" />
+    </root>
+  </artifact>
+</component>
